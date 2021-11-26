@@ -8,8 +8,8 @@ import {MikroORM} from '@mikro-orm/core'
 async function bootstrap() {
 	const configService = new ConfigService()
 	const logLevel = configService.get<string>('LOG_LEVEL', 'warn')
-	const orm = await MikroORM.init()
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({logger: {level: logLevel, prettyPrint: true}}))
+	const orm = await MikroORM.init()
 	app.setGlobalPrefix('api')
 
 	// Note: This is added as for @B4nan's recommendation.
